@@ -84,11 +84,8 @@ class HandAnalyzer(
                     padBmp = pad
                 }
                 val need = rowStride * h
-                var pb = padBuf
-                if (pb == null || pb.capacity() != need) {
-                    pb = ByteBuffer.allocateDirect(need)
-                    padBuf = pb
-                }
+                val pb: ByteBuffer = padBuf?.takeIf { it.capacity() == need }
+                    ?: ByteBuffer.allocateDirect(need).also { padBuf = it }
                 pb.clear()
                 pb.put(src)            // last row may be shorter than rowStride, rest stays 0
                 pb.rewind()
