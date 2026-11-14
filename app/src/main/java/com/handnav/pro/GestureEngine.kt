@@ -232,7 +232,8 @@ class GestureEngine(private val out: Output) {
         ringExt = dRing > dist(14, 0) * EXT_MARGIN
         pnkExt = dPnk > dist(18, 0) * EXT_MARGIN
         thumbOpen = dist(4, 5) / palm > THUMB_OPEN
-        pinchR = dist(4, 8) / palm
+        // Click = thumb tip + middle fingertip (index stays free for stable pointing)
+        pinchR = dist(4, 12) / palm
 
         TrackingState.idxR = idxR
         TrackingState.midR = midR
